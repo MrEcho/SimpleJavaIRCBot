@@ -1,0 +1,5 @@
+SERVER = irc.someserver.com
+PORT = 6669
+PASS = randomstring
+USER = WarKitteh
+NICK = WarKitteh

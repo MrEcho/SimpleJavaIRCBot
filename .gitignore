@@ -1,0 +1,11 @@
+
+.metadata/
+bin/
+.settings/
+connection.ini
+
+http.ini
+
+ji.log
+
+wunderground.ini
