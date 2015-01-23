@@ -50,7 +50,7 @@ public class irc2url {
 	public static void main(String[] args) {
 				
 		System.setProperty("file.name","ircbot.log");	
-		PropertyConfigurator.configure("log4j.config");
+		PropertyConfigurator.configure("./resources/log4j.config");
 
 		new irc2url();
 	}

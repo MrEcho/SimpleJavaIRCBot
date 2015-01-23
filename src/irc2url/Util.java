@@ -96,9 +96,9 @@ public class Util {
 	public static File getIniFile(String filename) {
 		File file = null;
 		
-		File f_ls = new File("./"+ filename);
+		File f_ls = new File("./resources/"+ filename);
 		if (f_ls.exists()){
-			file = new File("./" + filename);
+			file = new File("./resources/" + filename);
 		}
 		else {
 			System.out.println("Could not load: "+ filename);

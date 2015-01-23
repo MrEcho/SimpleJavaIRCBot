@@ -124,7 +124,7 @@ public class handle_http {
 			listOne.retainAll( listTwo );
 
 			float size = listOne.size() / f_title_array;
-			logger.debug("Fraction="+size);
+			logger.info("Fraction="+size);
 
 			if(title != null && size <= 0.5 && listTwo.size() >= 2 && title.length() >= 10 ){
 				title = StringEscapeUtils.unescapeHtml4(title);

@@ -1,0 +1,63 @@
+<project name="irc2url" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property name="source.dir"		value="src"/>
+	<property name="build.dir"		value="build"/>
+	<property name="bin.dir"		value="bin"/>
+	<property name="lib.dir"		value="lib"/>
+	<property name="jars.dir"		value="${build.dir}/jars"/>
+	<property name="resources.dir"	value="resources"/>
+	<property name="builder"		value="Trevor Benedict"/>
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
+		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+		<format property="year-month-day" pattern="yyyy-MM-dd" locale="en" />
+	</tstamp>
+
+	<!-- Create a classpath container -->
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Set up the classpath for the maifest files -->
+	<pathconvert property="manifest.classpath" pathsep=" ">
+		<path refid="build.classpath"/>
+		<mapper>
+			<chainedmapper>
+				<regexpmapper from="^.*/${lib.dir}(/.*)\.jar$$" to="./lib\1.jar"/>
+			</chainedmapper>
+		</mapper>
+	</pathconvert>
+
+
+	<target name="Build Jar" description="irc2url jar">
+		<antcall target="generateJar">
+			<param name="mainClass" value="irc2url.irc2url"/>
+		</antcall>
+	</target>
+
+	<target name="generateJar">
+		<delete dir="${jars.dir}"/>
+		<mkdir dir="${jars.dir}"/>
+		<mkdir dir="${jars.dir}/${resources.dir}"/>
+		<mkdir dir="${jars.dir}/${lib.dir}"/>
+		<copy todir="${jars.dir}/${resources.dir}">
+			<fileset dir="${resources.dir}" includes="**"/>
+		</copy>
+		<copy todir="${jars.dir}/${lib.dir}">
+			<fileset dir="${lib.dir}" includes="**"/>
+		</copy>
+		<jar destfile="${jars.dir}/ircbot.jar">
+			<fileset dir="${bin.dir}" includes="**/irc2url/*.class"/>
+			<manifest>
+				<attribute name="Main-Class" value="${mainClass}"/>
+				<attribute name="Class-Path" value="${manifest.classpath}"/>
+				<attribute name="Built-By" value="${builder}" />
+				<attribute name="Built-On" value="${build-info.current-date}" />
+				<attribute name="Built-At" value="${build-info.current-time}" />
+			</manifest>
+		</jar>
+	</target>
+
+</project>
