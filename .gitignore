@@ -3,13 +3,8 @@ build/
 bin/
 .settings/
 connection.ini
-
 http.ini
-
 ji.log
-
 wunderground.ini
-
 .externalToolBuilders/New_Builder.launch
-
 ircbot.log

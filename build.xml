@@ -33,7 +33,7 @@
 
 	<target name="Build Jar" description="irc2url jar">
 		<antcall target="generateJar">
-			<param name="mainClass" value="irc2url.irc2url"/>
+			<param name="mainClass" value="net.mrecho.ircbot.IRCBot"/>
 		</antcall>
 	</target>
 
@@ -49,7 +49,7 @@
 			<fileset dir="${lib.dir}" includes="**"/>
 		</copy>
 		<jar destfile="${jars.dir}/ircbot.jar">
-			<fileset dir="${bin.dir}" includes="**/irc2url/*.class"/>
+			<fileset dir="${bin.dir}" includes="**/net/mrecho/ircbot/*.class"/>
 			<manifest>
 				<attribute name="Main-Class" value="${mainClass}"/>
 				<attribute name="Class-Path" value="${manifest.classpath}"/>

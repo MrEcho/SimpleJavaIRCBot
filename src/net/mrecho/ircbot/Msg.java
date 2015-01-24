@@ -1,4 +1,4 @@
-package irc2url;
+package net.mrecho.ircbot;
 
 import org.apache.log4j.Logger;
 

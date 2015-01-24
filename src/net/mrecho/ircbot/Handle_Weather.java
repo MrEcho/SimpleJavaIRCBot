@@ -1,4 +1,4 @@
-package irc2url;
+package net.mrecho.ircbot;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -14,13 +14,13 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-public class handle_weather {
+public class Handle_Weather {
 
-	static Logger logger = Logger.getLogger(handle_weather.class.getName());
+	static Logger logger = Logger.getLogger(Handle_Weather.class.getName());
 
 	private String apikey = "";
 
-	public handle_weather() {
+	public Handle_Weather() {
 		loadSettings();
 	}
 
@@ -170,7 +170,7 @@ public class handle_weather {
 			}
 
 			if (outstring != null) {
-				ircconnection.send_msg(msg.chan, msg.getMode(), outstring);
+				IRCConnection.send_msg(msg.chan, msg.getMode(), outstring);
 			}
 
 		}// if not null

@@ -1,4 +1,4 @@
-package irc2url;
+package net.mrecho.ircbot;
 
 public enum modes {
 	PRIVMSG, OTHER

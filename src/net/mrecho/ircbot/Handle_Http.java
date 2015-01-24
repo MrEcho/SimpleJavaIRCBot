@@ -1,4 +1,4 @@
-package irc2url;
+package net.mrecho.ircbot;
 
 
 import java.io.BufferedInputStream;
@@ -19,15 +19,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 
-public class handle_http {
+public class Handle_Http {
 
-	static Logger logger = Logger.getLogger(handle_http.class.getName());
+	static Logger logger = Logger.getLogger(Handle_Http.class.getName());
 	private static String[]  BAD = {"google.com","wiki","fuck","shit","imgur","cocks","dick","mrecho","angrycoder.org"};
 	private Msg msg;
 	private String urlserver = "";
 	private String badwords = "";
 
-	public handle_http() {
+	public Handle_Http() {
 		loadSettings();
 		setBadWords();
 	}
@@ -128,7 +128,7 @@ public class handle_http {
 
 			if(title != null && size <= 0.5 && listTwo.size() >= 2 && title.length() >= 10 ){
 				title = StringEscapeUtils.unescapeHtml4(title);
-				ircconnection.send_msg(msg.chan,msg.getMode(), title);
+				IRCConnection.send_msg(msg.chan,msg.getMode(), title);
 			}
 			else{
 				logger.debug("Too much of a match");

@@ -1,4 +1,4 @@
-package irc2url;
+package net.mrecho.ircbot;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,12 +18,12 @@ public class Util {
 		BufferedReader rd;
 		String line;
 		String result = "";
-		
+
 		String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36";
-		
+
 		try {
 			url = new URL(urlToRead);
-			
+
 			conn = (HttpURLConnection) url.openConnection();
 
 			conn.setReadTimeout(5000);
@@ -32,31 +32,30 @@ public class Util {
 			conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
 			conn.addRequestProperty("User-Agent", userAgent);
 			conn.addRequestProperty("Accept", "*/*");
-			conn.addRequestProperty("Host", url.getHost() );
+			conn.addRequestProperty("Host", url.getHost());
 			conn.setInstanceFollowRedirects(true);
-			
+
 			boolean redirect = false;
-			
+
 			int status = conn.getResponseCode();
-			System.out.print("status: "+ status);
-			
+			System.out.print("status: " + status);
+
 			if (status != HttpURLConnection.HTTP_OK) {
 				if (status == HttpURLConnection.HTTP_MOVED_TEMP
-					|| status == HttpURLConnection.HTTP_MOVED_PERM
+						|| status == HttpURLConnection.HTTP_MOVED_PERM
 						|| status == HttpURLConnection.HTTP_SEE_OTHER)
-				redirect = true;
+					redirect = true;
 			}
-			
-			
+
 			if (redirect) {
-				 
+
 				// get redirect url from "location" header field
 				String newUrl = conn.getHeaderField("Location");
-				System.out.println(">> "+ newUrl);
-		 
+				System.out.println(">> " + newUrl);
+
 				// get the cookie if need, for login
 				String cookies = conn.getHeaderField("Set-Cookie");
-		 
+
 				// open the new connnection again
 				conn = (HttpURLConnection) new URL(newUrl).openConnection();
 				conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
@@ -65,20 +64,21 @@ public class Util {
 				conn.addRequestProperty("Referer", "google.com");
 				conn.setRequestProperty("Cookie", cookies);
 				conn.setInstanceFollowRedirects(true);
-				
+
 			}
-			
+
 			String contentType = conn.getContentType();
 			System.out.print(contentType);
-			
-			if(contentType.contains("html") || contentType.contains("json")) {
-				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			if (contentType.contains("html") || contentType.contains("json")) {
+				rd = new BufferedReader(new InputStreamReader(
+						conn.getInputStream()));
 				while ((line = rd.readLine()) != null) {
 					result += line;
 				}
 				rd.close();
 			}
-			
+
 			conn.disconnect();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -87,7 +87,7 @@ public class Util {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Retrieves the INI file for a specific component<br>
 	 * 
@@ -96,36 +96,37 @@ public class Util {
 	public static File getIniFile(String filename) {
 		File file = null;
 		
-		File f_ls = new File("./resources/"+ filename);
-		if (f_ls.exists()){
-			file = new File("./resources/" + filename);
+		File f_ls = new File(System.getProperty("user.dir")+"/resources/" + filename);
+		if (f_ls.exists()) {
+			file = new File(System.getProperty("user.dir")+"/resources/" + filename);
+		} else {
+			System.out.println("Working Directory: " + System.getProperty("user.dir"));
+			System.out.println("Could not load: " + filename);
 		}
-		else {
-			System.out.println("Could not load: "+ filename);
-		}
-		
+
 		return file;
 	}
-	
+
 	/**
-	 * Sends messages submitted to <code>System.out</code> to the output log and messages to
-	 * <code>System.err</code> to the error log.
+	 * Sends messages submitted to <code>System.out</code> to the output log and
+	 * messages to <code>System.err</code> to the error log.
 	 */
-    public static void tieSystemOutAndErrToLog(Logger logger) {
-        System.setOut(createLoggingProxy(System.out, logger));
-        System.setErr(createLoggingProxy(System.err, logger));
-    }
-    
-    /**
+	public static void tieSystemOutAndErrToLog(Logger logger) {
+		System.setOut(createLoggingProxy(System.out, logger));
+		System.setErr(createLoggingProxy(System.err, logger));
+	}
+
+	/**
 	 * Used by tieSystemOutAndErrToLog.
 	 */
-    private static PrintStream createLoggingProxy(final PrintStream realPrintStream, final Logger logger) {
-        return new PrintStream(realPrintStream) {
-            public void print(final String string) {
-                //realPrintStream.print(string);
-                logger.info(string.trim());
-            }
-        };
-    }
-	
+	private static PrintStream createLoggingProxy(
+			final PrintStream realPrintStream, final Logger logger) {
+		return new PrintStream(realPrintStream) {
+			public void print(final String string) {
+				// realPrintStream.print(string);
+				logger.info(string.trim());
+			}
+		};
+	}
+
 }

@@ -1,4 +1,4 @@
-package irc2url;
+package net.mrecho.ircbot;
 
 import java.util.TimerTask;
 
