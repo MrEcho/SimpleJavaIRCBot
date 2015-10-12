@@ -38,7 +38,7 @@ public class Util {
 			boolean redirect = false;
 
 			int status = conn.getResponseCode();
-			System.out.print("status: " + status);
+			//System.out.print("status: " + status);
 
 			if (status != HttpURLConnection.HTTP_OK) {
 				if (status == HttpURLConnection.HTTP_MOVED_TEMP
@@ -68,7 +68,7 @@ public class Util {
 			}
 
 			String contentType = conn.getContentType();
-			System.out.print(contentType);
+			//System.out.print(contentType);
 
 			if (contentType.contains("html") || contentType.contains("json")) {
 				rd = new BufferedReader(new InputStreamReader(

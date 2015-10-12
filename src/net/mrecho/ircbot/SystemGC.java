@@ -6,6 +6,6 @@ public class SystemGC extends TimerTask{
 	
 	public void run() { 
 		System.gc();
-		System.out.print("GC "+ System.currentTimeMillis());	
+		//System.out.print("GC "+ System.currentTimeMillis());	
 	}
 }

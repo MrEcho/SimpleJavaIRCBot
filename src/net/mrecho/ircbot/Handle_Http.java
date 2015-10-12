@@ -53,16 +53,6 @@ public class Handle_Http {
 				else if( part.startsWith("http://") || part.startsWith("https://") ){
 					logger.info("HTTP>>> "+ part);
 
-					String who = msg.name;
-					String chan = msg.chan.replace("#","");
-
-					byte[] base64_byte =  Base64.encodeBase64(part.toString().getBytes());
-					String base64 = new String(base64_byte);
-
-					String urlpost = urlserver+"?save=save&chan="+ chan +"&who="+ who +"&url="+base64;
-
-					Util.httpGET(urlpost);
-
 					do_query(part);
 				}//if
 				else{
@@ -93,7 +83,7 @@ public class Handle_Http {
 				title = title.trim();
 			}
 
-			doc.remove();
+			//doc.remove();
 			doc = null;
 
 		} catch(Exception e){

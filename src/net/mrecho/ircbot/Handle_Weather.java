@@ -83,6 +83,7 @@ public class Handle_Weather {
 				parser = null;
 				array = null;
 			} catch (Exception e) {
+				e.printStackTrace();
 				logger.error(e);
 			}
 
