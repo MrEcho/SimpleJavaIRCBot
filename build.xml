@@ -34,6 +34,7 @@
 	<target name="Build Jar" description="irc2url jar">
 		<antcall target="generateJar">
 			<param name="mainClass" value="net.mrecho.ircbot.IRCBot"/>
+			<param name="target" value="1.7"/>
 		</antcall>
 	</target>
 

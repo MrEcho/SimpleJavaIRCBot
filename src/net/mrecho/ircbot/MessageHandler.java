@@ -10,10 +10,12 @@ public class MessageHandler {
 
 	private Handle_Http handle_http;
 	private Handle_Weather handle_weather;
+	private Handle_Random handle_random;
 
 	public MessageHandler() {
 		handle_http = new Handle_Http();
 		handle_weather = new Handle_Weather();
+		handle_random = new Handle_Random();
 	}
 
 	public void process_raw(String raw) {
@@ -47,6 +49,10 @@ public class MessageHandler {
 
 				if (msg.text.startsWith("!weather") || msg.text.startsWith("!w") || msg.text.startsWith(".weather")) {
 					handle_weather.process(msg);
+				}
+				
+				if(msg.text.startsWith("!random")){
+					handle_random.process(msg);
 				}
 			}
 

@@ -6,6 +6,8 @@ import java.util.Timer;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import org.h2.jdbcx.JdbcDataSource;  
+
 public class IRCBot {
 
 	static Logger logger = Logger.getLogger(IRCBot.class.getName());
