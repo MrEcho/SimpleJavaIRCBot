@@ -11,11 +11,13 @@ public class MessageHandler {
 	private Handle_Http handle_http;
 	private Handle_Weather handle_weather;
 	private Handle_Random handle_random;
+	private Handle_Tacos handle_tacos;
 
 	public MessageHandler() {
 		handle_http = new Handle_Http();
 		handle_weather = new Handle_Weather();
 		handle_random = new Handle_Random();
+		handle_tacos = new Handle_Tacos();
 	}
 
 	public void process_raw(String raw) {
@@ -53,6 +55,10 @@ public class MessageHandler {
 				
 				if(msg.text.startsWith("!random")){
 					handle_random.process(msg);
+				}
+				
+				if(msg.text.startsWith("!tacos")){
+					handle_tacos.process(msg);
 				}
 			}
 

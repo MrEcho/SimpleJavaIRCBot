@@ -68,9 +68,9 @@ public class Util {
 			}
 
 			String contentType = conn.getContentType();
-			//System.out.print(contentType);
+			System.out.print(contentType);
 
-			if (contentType.contains("html") || contentType.contains("json")) {
+			if (contentType.contains("html") || contentType.contains("json") || contentType.contains("javascript")) {
 				rd = new BufferedReader(new InputStreamReader(
 						conn.getInputStream()));
 				while ((line = rd.readLine()) != null) {
